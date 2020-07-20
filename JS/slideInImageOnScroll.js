@@ -10,27 +10,42 @@ window.onload = () => {
 
 document.addEventListener('scroll',trackScroll);
 
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+}
+
 function trackScroll() {
-    // images.forEach(image=>{
-        currentlyScrolled = imagesDistance[0] - document.documentElement.clientHeight + i1.clientHeight / 2;
-        // console.log(`the offset height of the first image is ${imagesDistance[0] - document.documentElement.clientHeight + i1.clientHeight / 2}`);
-        let math = window.scrollY;
-        // console.log(`the currently scrolled is ${math}`);
-        if(math > currentlyScrolled){
-            i1.parentElement.classList.remove('float-right');
-            i1.parentElement.classList.add('slide_in');
-        }
-         
-        if(imagesDistance[0]+i1.clientHeight > window.scrollY+document.documentElement.clientHeight){
-            console.log('now');
-            i1.parentElement.classList.add('float-right');
-            i1.parentElement.classList.remove('slide_in');
-        }
+    for (let i = 0; i < images.length; i++) {
+        const scrolledToHalfImage = imagesDistance[i] - document.documentElement.clientHeight + images[i].clientHeight / 2;
 
+        if(window.scrollY > scrolledToHalfImage && window.scrollY < (scrolledToHalfImage + images[i].clientHeight / 2) + document.documentElement.clientHeight -10){
+            i % 2 == 0 ? ( 
+                images[i].parentElement.classList.remove('float-right')
+            ) : (
+                images[i].parentElement.classList.remove('float-left') 
+            );
 
-        if(window.scrollY+document.documentElement.clientHeight+10 > imagesDistance[0]+i1.clientHeight+document.documentElement.clientHeight){
-            i1.parentElement.classList.add('float-right');
-            i1.parentElement.classList.remove('slide_in');
+            images[i].parentElement.classList.add('slide_in')
         }
-    // })
+        
+        if(window.scrollY > (scrolledToHalfImage + images[i].clientHeight / 2) + document.documentElement.clientHeight -10){
+            i % 2 == 0 ? ( 
+                images[i].parentElement.classList.add('float-right')
+            ) : (
+                images[i].parentElement.classList.add('float-left') 
+            );
+
+            images[i].parentElement.classList.remove('slide_in')
+        }
+    
+        if(window.scrollY + document.documentElement.clientHeight < imagesDistance[i]+60){
+            i % 2 == 0 ? ( 
+                images[i].parentElement.classList.add('float-right')
+            ) : (
+                images[i].parentElement.classList.add('float-left') 
+            );
+
+            images[i].parentElement.classList.remove('slide_in')
+        }
+    }
 }
