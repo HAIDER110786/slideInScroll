@@ -1,6 +1,7 @@
 body{
     margin: 0;
     font-family: sans-serif;
+    overflow-x: hidden;
 }
 
 .header{
@@ -40,17 +41,32 @@ a{
     margin:0px 50px;
 }
 
-.blogBody>div img{
-    vertical-align:top;
-    margin: auto 0px;
-    opacity: 0;
-    transform: scale(0.95);
+.blogBody img{
+    height: 100%;
+    width:100%;
 }
 
-.slide-in{
-    transform: scale(1);
+.img_action_div{
+    height: 275px;
+    width: 35%;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: 0.5s;
+}
+
+.slide_in{
     opacity: 1;
+    transform: scale(1);
+    transition: 0.5s;
     transform: translateX(0px);
+}
+
+.float-left {
+    transform:translateX(-200px);
+}
+
+.float-right {
+    transform:translateX(200px);
 }
 
 .blogBody>div{
